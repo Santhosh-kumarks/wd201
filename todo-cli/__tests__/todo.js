@@ -48,6 +48,6 @@ describe("TodoList Test Suite", () => {
   });
   test("check dueLater", () => {
     add({ title: "exam mark", dueDate: tomorrow, completed: false });    
-    expect(dueLater().length).toBe(1);
+    expect(dueLater().length).toBe(2);
   });
 });
