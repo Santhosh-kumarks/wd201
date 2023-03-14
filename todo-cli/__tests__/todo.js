@@ -61,8 +61,8 @@ describe("Test list of items", function () {
     const overdueItems = await db.Todo.overdue();
     const aTodo = overdueItems[0];
     expect(aTodo.completed).toBe(true);
-    const displayValue = aTodo.displayableString();
-    expect(displayValue).toBe(
+    const displayValues = aTodo.displayableString();
+    expect(displayValues).toBe(
       `${aTodo.id}. [x] ${aTodo.title} ${aTodo.dueDate}`
     );
   });
@@ -71,8 +71,8 @@ describe("Test list of items", function () {
     const dueLaterItems = await db.Todo.dueLater();
     const aTodo = dueLaterItems[0];
     expect(aTodo.completed).toBe(false);
-    const displayValue = aTodo.displayableString();
-    expect(displayValue).toBe(
+    const displayValues = aTodo.displayableString();
+    expect(displayValues).toBe(
       `${aTodo.id}. [ ] ${aTodo.title} ${aTodo.dueDate}`
     );
   });
@@ -81,17 +81,17 @@ describe("Test list of items", function () {
     const dueTodayItems = await db.Todo.dueToday();
     const aTodo = dueTodayItems[0];
     expect(aTodo.completed).toBe(false);
-    const displayValue = aTodo.displayableString();
-    expect(displayValue).toBe(`${aTodo.id}. [ ] ${aTodo.title}`);
+    const displayValues = aTodo.displayableString();
+    expect(displayValues).toBe(`${aTodo.id}. [ ] ${aTodo.title}`);
   });
 
   test("Test completed dueToday displayable string", async () => {
     const dueTodayItems = await db.Todo.dueToday();
-    const aTodo = dueTodayItems[0];
-    expect(aTodo.completed).toBe(false);
+    const sTodo = dueTodayItems[0];
+    expect(sTodo.completed).toBe(false);
     await db.Todo.markAsComplete(aTodo.id);
     await aTodo.reload();
-    const displayValue = aTodo.displayableString();
-    expect(displayValue).toBe(`${aTodo.id}. [x] ${aTodo.title}`);
+    const displayValues = aTodo.displayableString();
+    expect(displayValues).toBe(`${aTodo.id}. [x] ${aTodo.title}`);
   });
 });
