@@ -63,6 +63,7 @@ describe("Todo Application", function () {
       title: "Buy ps3",
       dueDate: new Date().toISOString(),
       completed: false,
+
     });
     const response = await agent.get("/todos");
     const parsedResponse = JSON.parse(response.text);
@@ -81,7 +82,7 @@ describe("Todo Application", function () {
     const parsedResponse = JSON.parse(response.text);
     const TodolistID = parsedResponse.id;
 
-    const deleteTodoResponses = await agent.delete(`/todos/${todoID}`).send();
+    const deleteTodoResponses = await agent.delete(`/todos/${TodolistID}`).send();
     const parsedDelResp = JSON.parse(deleteTodoResponses.text);
     expect(parsedDelResp).toBe(true);
 
