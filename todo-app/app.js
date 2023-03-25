@@ -8,16 +8,16 @@ const { response } = require("express");
 app.use(bodyParser.json());
 app.set("view engine", "ejs");
 app.use(express.static(path.join(__dirname + "public")));
-// app.use(express.static("public"));
+
 
 app.get("/", async (req, res) => {
-  const allTodos = await Todo.getTodos();
+  const Alltodos = await Todo.getTodos();
   if (req.accepts("html")) {
     res.render("index", {
-      allTodos,
+      Alltodos,
     });
   } else {
-    res.json(allTodos);
+    res.json(Alltodos);
   }
 });
 
@@ -50,8 +50,8 @@ app.put("/todos/:id/markAsCompleted", async (req, res) => {
   console.log("Todo marks completed : ", req.params.id);
   const todo = await Todo.findByPk(req.params.id);
   try {
-    const updateTodo = await todo.markAsCompleted();
-    return res.json(updateTodo);
+    const UpdaTo = await todo.markAsCompleted();
+    return res.json(UpdaTo);
   } catch (error) {
     console.log(error);
     return response.status(422).json(error);
@@ -60,8 +60,8 @@ app.put("/todos/:id/markAsCompleted", async (req, res) => {
 
 app.delete("/todos/:id", async (req, res) => {
   console.log("We have to delete a Todo with ID: ", req.params.id);
-  const delete_Row = await Todo.destroy({ where: { id: req.params.id } });
-  res.send(delete_Row ? true : false);
+  const Del_row = await Todo.destroy({ where: { id: req.params.id } });
+  res.send(Del_row ? true : false);
 });
 
 module.exports = app;
